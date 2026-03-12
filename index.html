@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Cycle Fatigue Test — Displacement</title>
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -145,51 +144,7 @@
       background: #111;
     }
 
-    /* ── QR section (third video) ── */
-    .qr-row {
-      display: flex;
-      gap: 2.5rem;
-      align-items: flex-start;
-    }
 
-    .qr-row .video-card {
-      flex: 1;
-      min-width: 0;
-    }
-
-    .qr-panel {
-      width: 190px;
-      flex-shrink: 0;
-      background: var(--card);
-      border: 1px solid var(--rule);
-      border-radius: 4px;
-      padding: 1.5rem 1.25rem 1.25rem;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.9rem;
-      box-shadow: 0 2px 12px rgba(26,23,20,0.06);
-    }
-
-    .qr-label {
-      font-size: 0.65rem;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--muted);
-      font-weight: 500;
-      text-align: center;
-    }
-
-    #qrcode canvas, #qrcode img {
-      border-radius: 3px;
-    }
-
-    .qr-note {
-      font-size: 0.7rem;
-      color: var(--muted);
-      text-align: center;
-      line-height: 1.5;
-    }
 
     /* ── Responsive ── */
     @media (max-width: 640px) {
@@ -252,37 +207,17 @@
         <h2 class="section-title">Unodent 400 cycle fatigue test displacement</h2>
         <span class="divider"></span>
       </div>
-      <div class="qr-row">
-        <div class="video-card">
-          <video controls preload="metadata">
-            <source src="Unodent400.mp4" type="video/mp4" />
-            Your browser does not support the video tag.
-          </video>
-        </div>
-        <div class="qr-panel">
-          <span class="qr-label">Scan to view</span>
-          <div id="qrcode"></div>
-          <span class="qr-note">Unodent 400<br>Fatigue Test</span>
-        </div>
+      <div class="video-card">
+        <video controls preload="metadata">
+          <source src="Unodent400.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
       </div>
     </section>
 
   </main>
 
-  <script>
-    // Generate QR code pointing to the third video file
-    // Replace the URL below with the actual hosted URL of Unodent400.mp4 if needed
-    const videoUrl = window.location.origin + window.location.pathname.replace('index.html','') + 'Unodent400.mp4';
 
-    new QRCode(document.getElementById('qrcode'), {
-      text: videoUrl,
-      width: 148,
-      height: 148,
-      colorDark: '#1a1714',
-      colorLight: '#ffffff',
-      correctLevel: QRCode.CorrectLevel.M
-    });
-  </script>
 
 </body>
 </html>

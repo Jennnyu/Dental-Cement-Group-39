@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cycle Fatigue Test — Displacement</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream: #faf8f4;
+      --paper: #f2ede5;
+      --ink: #1a1714;
+      --muted: #7a7168;
+      --accent: #c0392b;
+      --rule: #ddd8cf;
+      --card: #ffffff;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--cream);
+      color: var(--ink);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      min-height: 100vh;
+    }
+
+    /* ── Header ── */
+    header {
+      background: var(--paper);
+      border-bottom: 1px solid var(--rule);
+      padding: 2.5rem 4rem 2rem;
+      display: flex;
+      align-items: flex-end;
+      gap: 2rem;
+    }
+
+    .header-eyebrow {
+      font-size: 0.68rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+    }
+
+    header h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      line-height: 1.15;
+      color: var(--ink);
+      font-weight: 400;
+    }
+
+    header h1 em {
+      font-style: italic;
+      color: var(--muted);
+    }
+
+    .header-meta {
+      margin-left: auto;
+      text-align: right;
+      font-size: 0.78rem;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    /* ── Main layout ── */
+    main {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 4rem 2rem 6rem;
+      display: flex;
+      flex-direction: column;
+      gap: 5rem;
+    }
+
+    /* ── Section ── */
+    .video-section {
+      opacity: 0;
+      transform: translateY(28px);
+      animation: fadeUp 0.6s ease forwards;
+    }
+    .video-section:nth-child(1) { animation-delay: 0.1s; }
+    .video-section:nth-child(2) { animation-delay: 0.25s; }
+    .video-section:nth-child(3) { animation-delay: 0.4s; }
+
+    @keyframes fadeUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1.2rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .section-number {
+      font-size: 0.65rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 500;
+      white-space: nowrap;
+    }
+
+    .section-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(1.1rem, 2vw, 1.45rem);
+      font-weight: 400;
+      color: var(--ink);
+    }
+
+    .divider {
+      flex: 1;
+      height: 1px;
+      background: var(--rule);
+      position: relative;
+      top: -3px;
+    }
+
+    /* ── Video card ── */
+    .video-card {
+      background: var(--card);
+      border: 1px solid var(--rule);
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 2px 12px rgba(26,23,20,0.06);
+      transition: box-shadow 0.3s ease;
+    }
+    .video-card:hover {
+      box-shadow: 0 6px 28px rgba(26,23,20,0.11);
+    }
+
+    .video-card video {
+      display: block;
+      width: 100%;
+      max-height: 520px;
+      object-fit: contain;
+      background: #111;
+    }
+
+    /* ── QR section (third video) ── */
+    .qr-row {
+      display: flex;
+      gap: 2.5rem;
+      align-items: flex-start;
+    }
+
+    .qr-row .video-card {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .qr-panel {
+      width: 190px;
+      flex-shrink: 0;
+      background: var(--card);
+      border: 1px solid var(--rule);
+      border-radius: 4px;
+      padding: 1.5rem 1.25rem 1.25rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.9rem;
+      box-shadow: 0 2px 12px rgba(26,23,20,0.06);
+    }
+
+    .qr-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-weight: 500;
+      text-align: center;
+    }
+
+    #qrcode canvas, #qrcode img {
+      border-radius: 3px;
+    }
+
+    .qr-note {
+      font-size: 0.7rem;
+      color: var(--muted);
+      text-align: center;
+      line-height: 1.5;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 640px) {
+      header { padding: 2rem 1.5rem 1.5rem; flex-wrap: wrap; }
+      .header-meta { margin-left: 0; text-align: left; }
+      .qr-row { flex-direction: column; }
+      .qr-panel { width: 100%; flex-direction: row; gap: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div>
+      <div class="header-eyebrow">Laboratory Documentation</div>
+      <h1>Cycle Fatigue Test<br><em>Displacement Series</em></h1>
+    </div>
+    <div class="header-meta">
+      3 recordings<br>
+      Fuji &amp; Unodent
+    </div>
+  </header>
+
+  <main>
+
+    <!-- Video 1 -->
+    <section class="video-section">
+      <div class="section-header">
+        <span class="section-number">01</span>
+        <h2 class="section-title">Fuji 400 cycle fatigue test displacement</h2>
+        <span class="divider"></span>
+      </div>
+      <div class="video-card">
+        <video controls preload="metadata">
+          <source src="屏幕录制_2026-03-11_191709.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+      </div>
+    </section>
+
+    <!-- Video 2 -->
+    <section class="video-section">
+      <div class="section-header">
+        <span class="section-number">02</span>
+        <h2 class="section-title">Fuji 400 cycle fatigue test displacement</h2>
+        <span class="divider"></span>
+      </div>
+      <div class="video-card">
+        <video controls preload="metadata">
+          <source src="Fuji400.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+      </div>
+    </section>
+
+    <!-- Video 3 -->
+    <section class="video-section">
+      <div class="section-header">
+        <span class="section-number">03</span>
+        <h2 class="section-title">Unodent 400 cycle fatigue test displacement</h2>
+        <span class="divider"></span>
+      </div>
+      <div class="qr-row">
+        <div class="video-card">
+          <video controls preload="metadata">
+            <source src="Unodent400.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+        </div>
+        <div class="qr-panel">
+          <span class="qr-label">Scan to view</span>
+          <div id="qrcode"></div>
+          <span class="qr-note">Unodent 400<br>Fatigue Test</span>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <script>
+    // Generate QR code pointing to the third video file
+    // Replace the URL below with the actual hosted URL of Unodent400.mp4 if needed
+    const videoUrl = window.location.origin + window.location.pathname.replace('index.html','') + 'Unodent400.mp4';
+
+    new QRCode(document.getElementById('qrcode'), {
+      text: videoUrl,
+      width: 148,
+      height: 148,
+      colorDark: '#1a1714',
+      colorLight: '#ffffff',
+      correctLevel: QRCode.CorrectLevel.M
+    });
+  </script>
+
+</body>
+</html>
